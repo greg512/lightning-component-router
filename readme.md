@@ -119,7 +119,7 @@ handleBackButtonPress: function(cmp, e, h) {
 },
 handleForwardButtonPress: function(cmp, e, h) {
     var routeNavForwardEvent = $A.get('e.lcr:routeNavForward');
-    routeNavForwardEvent.setParams({routerName: ''});
+    routeNavForwardEvent.setParams({routerName: 'router-name'});
     routeNavForwardEvent.fire();
 },
 ```
