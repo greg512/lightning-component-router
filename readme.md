@@ -66,7 +66,7 @@ This will set contactId to `0035000002iiVc4AAE`, but more than likely you want t
 ```html
 <aura:handler name="change" value="{!v.contactId}" action="{!c.contactIdChangeHandler}"/>
 ```
-### Route Change Animations
+## Route Change Animations
 It's possible with some custom CSS and a custom renderer on the components associated with your route. I'm thinking about adding support for common route transition animations to the Route component so it doesn't have to be done for each component associated with a Route.
 
 For now you can create some css classes in the style resource:
