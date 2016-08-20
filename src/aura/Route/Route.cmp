@@ -1,0 +1,40 @@
+<aura:component access="Global" >
+
+
+	<!-- FIRE THESE EVENTS -->
+    <aura:registerEvent name="routeChangeSuccess" type="c:routeChangeSuccess" />
+    <aura:registerEvent name="routeChangeError" type="c:routeChangeError" />
+
+
+    <!-- LISTEN TO THESE EVENTS -->
+    <aura:handler name="init" value="{!this}" action="{!c.initHandler}" />
+    <aura:handler event="c:routeChangeStart" action="{!c.handleRouteChangeStart}" />
+
+
+    <!-- COMPONENT ATTRIBUTES -->
+    <aura:attribute name="name"
+                    type="String"
+                    description="The route's name.  This is stored in the Router's navigation history and can be
+                                 exposed in the UI."
+                    required="true" />
+
+    <aura:attribute name="path"
+                    type="String"
+                    description="relative path for route."
+                    required="true" />
+
+    <aura:attribute name="component"
+                    type="String"
+                    description="Name of lightning component associated with this route."
+                    required="true" />
+
+    <aura:attribute name="componentAttributes"
+                    type="Object"
+                    description="Object of attributes will populate Route component."
+                    default="{}" />
+
+
+        {!v.body}
+
+
+</aura:component>

@@ -1,0 +1,37 @@
+<aura:component access="GLOBAL">
+
+    <!-- FIRES THESE EVENTS -->
+    <aura:registerEvent name="routeChangeStart" type="c:routeChangeStart" />
+    <aura:registerEvent name="routeHistoryChangeSuccess" type="c:routeHistoryChangeSuccess" />
+
+
+    <!-- LISTENS TO THESE EVENTS -->
+    <aura:handler event="c:routeNavBack" action="{!c.handleRouteNavBack}" />
+    <aura:handler event="c:routeNavForward" action="{!c.handleRouteNavForward}" />
+    <aura:handler event="c:routeNavHistoryChange" action="{!c.handleRouteHistoryChange}" />
+    <aura:handler event="c:routeChangeAttempt" action="{!c.handleRouteChangeAttempt}" />
+    <aura:handler event="c:routeChangeSuccess" action="{!c.handleRouteChangeSuccess}" />
+    <aura:handler event="c:routeChangeError" action="{!c.handleRouteChangeError}" />
+
+
+
+    <!-- COMPONENT ATTRIBUTES -->
+    <aura:attribute name="name"
+                    type="String"
+                    description="Unique name for the Router."
+                    default="" />
+
+    <aura:attribute name="history"
+                    type="Object[]"
+                    description="List of navigation history for this Router." />
+
+    <aura:attribute name="historyIndex"
+                    type="Integer"
+                    description="Index representing the current route in history." />
+
+
+
+    {!v.body}
+
+
+</aura:component>

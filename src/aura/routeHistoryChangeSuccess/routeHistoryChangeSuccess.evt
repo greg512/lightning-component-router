@@ -1,0 +1,22 @@
+<aura:event type="APPLICATION"
+            description="Fired by a Router when the history changes.  Intended for external components to manage breadcrumbs or back/forward navigation."
+            access="GLOBAL">
+
+    <aura:attribute name="routerName"
+                    type="String"
+                    description="Name of the Router."
+                    required="true" />
+
+
+    <aura:attribute name="history"
+                    type="Object[]"
+                    description="The current history collection for this Router."
+                    required="true" />
+
+    <aura:attribute name="historyIndex"
+                    type="Integer"
+                    description="The index value representing the current Route in the history collection."
+                    required="true" />
+
+
+</aura:event>

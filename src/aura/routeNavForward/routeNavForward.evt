@@ -1,0 +1,8 @@
+<aura:event type="APPLICATION" description="Fire this event to navigate forwards for a given Router." access="GLOBAL">
+    
+    <aura:attribute name="routerName" 
+                    type="String"
+                    description="Name of the Router who is the parent of the intended new Route." 
+                    required="true" />
+    
+</aura:event>

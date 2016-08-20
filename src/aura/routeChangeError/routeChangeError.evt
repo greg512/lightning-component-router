@@ -1,0 +1,15 @@
+<aura:event type="APPLICATION" 
+            description="Fired when a Route component listening to the RouteChangeAttempt event has a matching path value and the Route was not successfully changed."
+            access="PUBLIC">
+    
+    <aura:attribute name="path" 
+                    type="String"
+                    description="Path of the failed Route." 
+                    required="true" />
+    
+    <aura:attribute name="message" 
+                    type="String"
+                    description="Error message from the failed attempt, if available." 
+                    required="true" />
+    
+</aura:event>

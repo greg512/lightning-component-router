@@ -1,0 +1,13 @@
+<aura:event type="APPLICATION" description="Fire this event to navigate to a specific Route in a Router's history" access="GLOBAL">
+    
+    <aura:attribute name="routerName" 
+                    type="String"
+                    description="Name of the Router who is the parent of the intended new Route." 
+                    required="true" />
+    
+    <aura:attribute name="historyIndex" 
+                    type="Integer"
+                    description="The index of the Route in the Router's history collection." 
+                    required="true" />
+    
+</aura:event>

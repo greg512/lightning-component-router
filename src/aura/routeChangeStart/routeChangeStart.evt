@@ -1,0 +1,20 @@
+<aura:event type="APPLICATION" 
+            description="Fired when a Router listening for the routeChangeAttempt event has the same name as the routerName attribute from routeChangeAttempt event payload." 
+            access="GLOBAL">
+    
+    <aura:attribute name="routerName" 
+                    type="String"
+                    description="Name of the Router who is the parent of the intended new Route." 
+                    required="true" />
+    
+    <aura:attribute name="path" 
+                    type="String"
+                    description="Path of the new Route." />
+    
+    <aura:attribute name="historyIndex" 
+                    type="Integer"
+                    description="If provided, this will be sent back with the routeChangeSuccess payload.  It 
+                                 will indicate that the Router history shouldn't be updated with a new item."  />
+    
+    
+</aura:event>

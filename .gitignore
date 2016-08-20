@@ -1,0 +1,7 @@
+# MM stuff
+/config
+*.sublime-project
+# xml metadata files
+/src/aura/**/*.xml
+
+*.log
