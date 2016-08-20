@@ -1,15 +1,13 @@
 # Lightning Component Router
-My attempt to build a component router for the [Lightning Component Framework](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_framework.htm). This
-is basically a copy of React Router.
+A component router for the [Lightning Component Framework](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_framework.htm). This isn't battle tested, so use at your own risk. It borrows heavily from the design of React Router.
 
-Here's the [installation link](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t50000000EqKD) if you'd like to try it out.
+Install with [this link](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t50000000EqKD).
 
 ## Why?
-Routers are an essential tool in building single page applications. Perhaps less important for the Lightning Component Framework, but it's still a missing piece in the framework in my opinion.
+Routers are an essential tool in building single page applications and it's currently a missing feature with lightning components.
 
 ## How Does it Work?
-
-It's pretty simple. You can set up your routes declaratively like this:
+It's pretty simple. You can set up your routes inside a component like this:
 
 ```html
 <lcr:Router>
@@ -19,7 +17,7 @@ It's pretty simple. You can set up your routes declaratively like this:
 </lcr:Router>
 ```
 
-The `<lcr:Router>` component is your home for a connected group of routes. In this example you have three routes: Home, About and Contact. The `component` attribute must be the name of an existing component. The `path` value must be unique.
+The `<lcr:Router>` component represents a connected group of routes. In this example you have three routes: Home, About and Contact. The `component` attribute must be the name of an existing component. The `path` value must be unique.
 
 See how the Home route `path` value is a single forward slash? This is how you set the default Route for a Router. In this scenario, the c:home component will be initially rendered.
 
@@ -33,14 +31,14 @@ At this point there's no way to navigate to other routes. You can do this with t
 </ul>
 ```
 
-As you click each link rendered by the Link component, the Routes will render and unrender. Cool!
+As you click each link rendered by the Link component, the Routes will render and unrender.
 
-### A major drawback: back/forward browser navigation
-This is a huge bummer. The framework prevents you from manipulating the browser history or changing the url for security reasons. If you use the back or forward navigation tools in your browser, it won't honor the navigation history inside of your Router. The Router maintains its own history and provides the tools to manage your own back/forward navigation and breadcrumbs from within the application container component, but that's the best that can be done for now.
+### A Major Drawback: Back/Forward Browser Navigation
+Unfortunately the framework prevents you from manipulating the browser history or changing the url for security reasons. If you use the back or forward navigation tools in your browser, it won't honor the navigation history inside of your Router. The Router maintains its own history and provides the tools to manage your own back/forward navigation and breadcrumbs from within the application container component, but that's the best that can be done for now.
 
 This is critical Router functionality, but there's [hope for the future](http://documentation.auraframework.org/auradocs#reference?topic=api:AuraHistoryService).
 
-## Multiple Routers and Nested Router
+## Multiple Routers and Nested Routers
 You can have multiple routers and nested routers but you have to give the Router a unique name:
 
 ```html
@@ -105,6 +103,7 @@ Now this component will fade in!
 
 ## Managing Router History & Navigation
 There are some events you can fire and listen to in order to manage history and navigation inside your application.
+
 ### The routeNavBack and routeNavForward Events
 Fire the `routeNavBack`  and `routeNavForward` events to navigate back and forward, respectively. Indicate in your component that it will fire the events:
 ```html
