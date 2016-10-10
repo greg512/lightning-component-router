@@ -1,13 +1,19 @@
 <aura:event type="APPLICATION" description="Fired when attempting to change the Route." access="GLOBAL">
-    
-    <aura:attribute name="routerName" 
+
+    <aura:attribute name="routerName"
                     type="String"
-                    description="Name of the Router who is the parent of the intended new Route." 
+                    description="Name of the Router who is the parent of the intended new Route."
                     required="true" />
-    
-    <aura:attribute name="path" 
+
+    <aura:attribute name="path"
                     type="String"
-                    description="Path of the new Route." 
+                    description="Path of the new Route."
                     required="true" />
-    
+
+    <aura:attribute name="label"
+                    type="String"
+                    description="A unique label for the Route. Useful if the route uses a route parameter and you'd
+                                 rather display a specific route label rather than the route name."
+                    default="" />
+
 </aura:event>

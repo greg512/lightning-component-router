@@ -19,10 +19,12 @@
 	handleRouteChangeStart: function(cmp, e, h) {
 		var newPath = e.getParam('path'),
 			routePath = cmp.get('v.path'),
+			label = e.getParam('label'),
             newPathRouterName = e.getParam('routerName'),
             routeRouterName = routePath.indexOf('/') > 0 ? routePath.split('/')[0] : '',
             hasRouteParam = routePath.indexOf(':') > 0,
             routeParam;
+		cmp.set('v.label', label);
         if(hasRouteParam) {
             routeParam = newPath.slice(routePath.indexOf(':'));
             newPath = newPath.slice(0, routePath.indexOf(':'));

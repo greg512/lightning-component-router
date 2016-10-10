@@ -21,8 +21,9 @@
                     routeChangeSuccessEvent = $A.get('e.c:routeChangeSuccess'),
                     path = cmp.get('v.path'),
                     name = cmp.get('v.name'),
+					label = cmp.get('v.label'),
                     historyIndex = e.getParam('historyIndex'),
-                    eventPayload = {path: path, name: name},
+                    eventPayload = {path: path, name: name, label: label},
                     componentAttrs = cmp.get('v.componentAttributes');
                 if(componentAttrs !== '{}') {
                     for(var attr in componentAttrs) {

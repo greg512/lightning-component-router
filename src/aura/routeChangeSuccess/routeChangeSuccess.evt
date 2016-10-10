@@ -1,21 +1,27 @@
-<aura:event type="APPLICATION" 
+<aura:event type="APPLICATION"
             description="Fired when a Route component listening to the RouteChangeAttempt event has a matching path value and the Route has successfully changed the Route."
             access="GLOBAL">
-    
-    
-    <aura:attribute name="name" 
+
+
+    <aura:attribute name="name"
                     type="String"
-                    description="Name of the new Route." 
+                    description="Name of the new Route."
                     required="true" />
-    
-    <aura:attribute name="path" 
+
+    <aura:attribute name="label"
                     type="String"
-                    description="Path of the new Route." 
+                    description="Label of the new Route. Useful if the route uses a route parameter and
+                    you'd rather display a specific route label rather than the route name." 
                     required="true" />
-    
-        <aura:attribute name="historyIndex" 
+
+    <aura:attribute name="path"
+                    type="String"
+                    description="Path of the new Route."
+                    required="true" />
+
+        <aura:attribute name="historyIndex"
                     type="Integer"
                     description="If provided it indicates that the Router history shouldn't be updated.
                                  Update the historyIndex with this value and don't update the history collection."  />
-    
+
 </aura:event>

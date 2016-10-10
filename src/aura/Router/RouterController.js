@@ -8,10 +8,11 @@
 	handleRouteChangeAttempt: function(cmp, e, h) {
         var routerName = cmp.get('v.name'),
             eventRouterName = e.getParam('routerName'),
-			newRoutePath = e.getParam('path');
+			newRoutePath = e.getParam('path'),
+			label = e.getParam('label');
         if(routerName === eventRouterName) {
 			var routeChangeStartEvent = $A.get('e.c:routeChangeStart');
-            routeChangeStartEvent.setParams({path: newRoutePath, routerName: routerName});
+            routeChangeStartEvent.setParams({path: newRoutePath, routerName: routerName, label: label});
             routeChangeStartEvent.fire();
         }
 	},
@@ -25,11 +26,12 @@
         var path = e.getParam('path'),
             routerName = path.indexOf('/') > 0 ? path.split('/')[0] : '',
             newHistoryIndex = e.getParam('historyIndex'),
-            updateHistory = $A.util.isUndefined(newHistoryIndex);
+            updateHistory = $A.util.isUndefined(newHistoryIndex),
+			label = e.getParam('label');
         if(routerName === cmp.get('v.name')) {
             var routeHistoryChangeSuccessEvent = $A.get('e.c:routeHistoryChangeSuccess');
             if(updateHistory) {
-                var historyItem = {name: e.getParam('name'), path: e.getParam('path')},
+                var historyItem = {name: e.getParam('name'), path: path, label: label},
                     history = cmp.get('v.history'),
                     currentHistoryIndex = cmp.get('v.historyIndex'),
                     lastIndexValue = history.length - 1;

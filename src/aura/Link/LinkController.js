@@ -9,8 +9,9 @@
         e.preventDefault();
 		var routeChangeEvent = $A.get('e.c:routeChangeAttempt'),
 			to = cmp.get('v.to'),
+			label = cmp.get('v.label'),
             routerName = to.indexOf('/') > 0 ? to.split('/')[0] : '';
-        routeChangeEvent.setParams({routerName: routerName, path: to});
+        routeChangeEvent.setParams({routerName: routerName, path: to, label: label});
 		routeChangeEvent.fire();
 	}
 })

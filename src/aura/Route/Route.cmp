@@ -18,6 +18,13 @@
                                  exposed in the UI."
                     required="true" />
 
+    <aura:attribute name="label"
+                    type="String"
+                    description="A unique label for the Route. Set from the routeChangeAttempt event, and passed through
+                                 from the routeChangeStart event. Useful if the route uses a route parameter and
+                                 you'd rather display a specific route label rather than the route name."
+                    default="" />
+
     <aura:attribute name="path"
                     type="String"
                     description="relative path for route."

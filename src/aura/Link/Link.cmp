@@ -1,15 +1,15 @@
 <aura:component access="Global">
-	
+
     <!-- FIRE THESE EVENTS -->
     <aura:registerEvent name="routeChangeAttempt" type="c:routeChangeAttempt" />
 
     <!-- COMPONENT ATTRIBUTES -->
     <aura:attribute name="to" type="String" description="Component name" required="true" />
     <aura:attribute name="class" type="String" />
-    
-    
+    <aura:attribute name="label" type="String" />
+
 
     <a href="" class="{!v.class}" onclick="{!c.linkClickHandler}">{!v.body}</a>
-    
+
 
 </aura:component>
