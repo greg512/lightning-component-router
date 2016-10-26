@@ -2,12 +2,14 @@
 	/*
 	* renderRoute
 	* @Description	Create the component associated with this Route and render
+	* @param {String}	routePath	Route path value. Used in routeChangeSuccessEvent payoad.
 	* @param {Object}	routeParam	A route paramater that's parsed from the to
 	*								attribute of the Link component. A route parameter
 	*								is designated by a colon. <Link to="routepath/:id" ... />
 	*/
-	renderRoute: function(cmp, e, h, routeParam) {
+	renderRoute: function(cmp, e, h, routePath, routeParams) {
 		var componentName = cmp.get('v.component');
+		if(!routeParams) routeParams = [];
 		if(componentName) {
 			$A.createComponent(componentName, {}, newComponentHandler);
 		} else {
@@ -30,11 +32,16 @@
                         newCmp.set('v.' + attr, componentAttrs[attr]);
                     }
                 }
-                if(!$A.util.isUndefined(routeParam)) {
-                    var paramStartIndex = path.indexOf(':'),
+                if(routeParams.length > 0) {
+					var paramStartIndex = path.indexOf(':'),
                     	paramName = path.slice(paramStartIndex + 1);
-                    eventPayload.path = path.slice(0, paramStartIndex) + routeParam;
-                    newCmp.set('v.' + paramName, routeParam);
+                    eventPayload.path = routePath;
+					for(var i = 0; i < routeParams.length; i++) {
+						for(var prop in routeParams[i]) {
+							newCmp.set('v.' + prop, routeParams[i][prop]);
+							console.log('v.' + prop + ':', newCmp.get('v.' + prop));
+						}
+					}
                 }
                 if(historyIndex > -1) eventPayload.historyIndex = historyIndex;
                 routeChangeSuccessEvent.setParams(eventPayload);
@@ -62,5 +69,27 @@
             }, 0);*/
             cmp.set('v.body', []);
         }
+	},
+	/*
+	* getRouteParams
+	* @Description	constructs and returns an array of objects represeting route parameters as key value pairs
+	* @Param	{String}	routePath	The path for this route. Includes parameter names (/route/path/:param1/:param2)
+	* @Param	{String}	pathWithParams	Path with param values (/route/path/1234/5678)
+	*/
+	getRouteParams: function(routePath, pathWithParams) {
+		var routeParamNames = routePath.split('/:'),
+			routeParamValues,
+			routeParams,
+			routeParam;
+		routeParamNames.shift();
+		routeParamValues = pathWithParams.split('/');
+		if(routeParamValues[routeParamValues.length - 1] === '') routeParamValues.pop();
+		routeParamValues.splice(0, routeParamValues.length - routeParamNames.length);
+		routeParams = routeParamNames.map(function(routeParamName, i) {
+			routeParam = {}
+			routeParam[routeParamName.replace('/', '')] = routeParamValues[i]
+			return routeParam;
+		});
+		return routeParams;
 	}
 })

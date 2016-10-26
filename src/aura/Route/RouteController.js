@@ -23,15 +23,15 @@
             newPathRouterName = e.getParam('routerName'),
             routeRouterName = routePath.indexOf('/') > 0 ? routePath.split('/')[0] : '',
             hasRouteParam = routePath.indexOf(':') > 0,
-            routeParam;
+            routeParams = [];
 		cmp.set('v.label', label);
         if(hasRouteParam) {
-            routeParam = newPath.slice(routePath.indexOf(':'));
+			routeParams = h.getRouteParams(routePath, newPath);
             newPath = newPath.slice(0, routePath.indexOf(':'));
             routePath = routePath.slice(0, routePath.indexOf(':'));
         }
 		if(newPath === routePath) {
-			h.renderRoute(cmp, e, h, routeParam);
+			h.renderRoute(cmp, e, h, e.getParam('path'), routeParams);
 		} else if(newPathRouterName === routeRouterName) {
 			h.unrenderRoute(cmp, e, h);
 		}
