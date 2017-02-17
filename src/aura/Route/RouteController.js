@@ -23,7 +23,7 @@
             newPathRouterName = e.getParam('routerName'),
             routeRouterName = routePath.indexOf('/') > 0 ? routePath.split('/')[0] : '',
             hasRouteParams = routePath.indexOf(':') > 0,
-            routeParams = [];
+            routeParams = {};
 		cmp.set('v.hasRouteParams', hasRouteParams);
 		cmp.set('v.label', label);
         if(hasRouteParams) {
