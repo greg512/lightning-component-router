@@ -1,8 +1,6 @@
 # Lightning Component Router
 A component router for the [Lightning Component Framework](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_framework.htm). This isn't battle tested, so use at your own risk. It borrows heavily from the design of React Router.
 
-Install with [this link](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t50000000EqKD).
-
 ## Why?
 Routers are an essential tool in building single page applications and it's currently a missing feature with lightning components.
 
@@ -10,14 +8,14 @@ Routers are an essential tool in building single page applications and it's curr
 It's pretty simple. You can set up your routes inside a component like this:
 
 ```html
-<lcr:Router>
-    <lcr:Route name="Home" path="/" component="c:home" />
-    <lcr:Route name="About" path="/about" component="c:about" />
-    <lcr:Route name="Contact" path="/contact" component="c:contact" />
+<c:Router>
+    <c:Route name="Home" path="/" component="c:home" />
+    <c:Route name="About" path="/about" component="c:about" />
+    <c:Route name="Contact" path="/contact" component="c:contact" />
 </lcr:Router>
 ```
 
-The `<lcr:Router>` component represents a connected group of routes. In this example you have three routes: Home, About and Contact. The `component` attribute must be the name of an existing component. The `path` value must be unique.
+The `<c:Router>` component represents a connected group of routes. In this example you have three routes: Home, About and Contact. The `component` attribute must be the name of an existing component. The `path` value must be unique.
 
 See how the Home route `path` value is a single forward slash? This is how you set the default Route for a Router. In this scenario, the c:home component will be initially rendered.
 
@@ -25,9 +23,9 @@ At this point there's no way to navigate to other routes. You can do this with t
 
 ```html
 <ul>
-    <li><lcr:Link to="/">Home</lcr:Link>
-    <li><lcr:Link to="/about">About</lcr:Link>
-    <li><lcr:Link to="/contact">Contact</lcr:Link>
+    <li><c:Link to="/">Home</lcr:Link>
+    <li><c:Link to="/about">About</lcr:Link>
+    <li><c:Link to="/contact">Contact</lcr:Link>
 </ul>
 ```
 
@@ -42,22 +40,22 @@ This is critical Router functionality, but there's [hope for the future](http://
 You can have multiple routers and nested routers but you have to give the Router a unique name:
 
 ```html
-<lcr:Router name="nested-router">
+<c:Router name="nested-router">
 ```
 And you have to include the Router name in the `Route` and `Link` components:
 ```html
-<lcr:Router name="nested-router">
-    <lcr:Route name="Nested Route Home" path="nested-router/" component="c:nestedComponent" />
+<c:Router name="nested-router">
+    <c:Route name="Nested Route Home" path="nested-router/" component="c:nestedComponent" />
 </lcr:Router>
 
-<lcr:Link to="nested-router/">Go to Route</lcr:Link>
+<c:Link to="nested-router/">Go to Route</lcr:Link>
 ```
 
 ## Setting Component Attributes
 Assume you have a component called c:ContactDetail with an attribute named contactId and you want to set the contactId when you navigate to the Route associated with the c:ContactDetail component:
 ```html
-<lcr:Router>
-    <lcr:Route name="Contact Detail" path="/contact/:contactId" component="c:ContactDetail" />
+<c:Router>
+    <c:Route name="Contact Detail" path="/contact/:contactId" component="c:ContactDetail" />
 </lcr:Router>
 
 <Link to="/contact/0035000002iiVc4AAE" />
@@ -127,3 +125,6 @@ handleForwardButtonPress: function(cmp, e, h) {
 The `routeHistoryChangeSuccess` event is fired when the Router history changes. It includes the Router name, an Array of objects where each object represents a Route in the Router's history and a history index value representing the active index of the history array. For example, if the history Array has 5 items and the history index is 4, then active Route in the history array is the last item. If you fired the `routeNavBack` event, the routeHistoryChangeSuccess event would send a new payload with the history index value as 3.
 
 The information provided from the routeHistoryChangeSuccess event can be used to set a conditional active class in your navigation or to build a breadcrumbs component.
+
+## TODOs
+ - Test navigating to components using the new force:navigateToComponent event

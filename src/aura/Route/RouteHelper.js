@@ -8,12 +8,14 @@
 	*								is designated by a colon. <Link to="routepath/:id" ... />
 	*/
 	renderRoute: function(cmp, e, h, routePath, routeParams) {
-		var componentName = cmp.get('v.component');
-		if(!routeParams) routeParams = [];
+		var componentName = cmp.get('v.component'),
+			hasRouteParams = cmp.get('v.hasRouteParams');
+		if(!routeParams) routeParams = {};
 		if(componentName) {
-			$A.createComponent(componentName, {}, newComponentHandler);
+			$A.createComponent(componentName, routeParams, newComponentHandler);
 		} else {
 			//TODO: how to handle this error?
+			console.log('heres the error');
 			throw new Error('ERROR');
 		}
 
@@ -32,16 +34,9 @@
                         newCmp.set('v.' + attr, componentAttrs[attr]);
                     }
                 }
-                if(routeParams.length > 0) {
-					var paramStartIndex = path.indexOf(':'),
-                    	paramName = path.slice(paramStartIndex + 1);
+
+                if(hasRouteParams) {
                     eventPayload.path = routePath;
-					for(var i = 0; i < routeParams.length; i++) {
-						for(var prop in routeParams[i]) {
-							newCmp.set('v.' + prop, routeParams[i][prop]);
-							console.log('v.' + prop + ':', newCmp.get('v.' + prop));
-						}
-					}
                 }
                 if(historyIndex > -1) eventPayload.historyIndex = historyIndex;
                 routeChangeSuccessEvent.setParams(eventPayload);
@@ -72,7 +67,7 @@
 	},
 	/*
 	* getRouteParams
-	* @Description	constructs and returns an array of objects represeting route parameters as key value pairs
+	* @Description	constructs and returns an object represeting route parameters as key value pairs
 	* @Param	{String}	routePath	The path for this route. Includes parameter names (/route/path/:param1/:param2)
 	* @Param	{String}	pathWithParams	Path with param values (/route/path/1234/5678)
 	*/
@@ -81,15 +76,14 @@
 			routeParamValues,
 			routeParams,
 			routeParam;
-		routeParamNames.shift();
+			routeParamNames.shift();
 		routeParamValues = pathWithParams.split('/');
 		if(routeParamValues[routeParamValues.length - 1] === '') routeParamValues.pop();
 		routeParamValues.splice(0, routeParamValues.length - routeParamNames.length);
-		routeParams = routeParamNames.map(function(routeParamName, i) {
-			routeParam = {}
-			routeParam[routeParamName.replace('/', '')] = routeParamValues[i]
-			return routeParam;
-		});
+		routeParams = routeParamNames.reduce(function(curVal, prevVal, i) {
+			curVal[routeParamNames[i].replace('/', '')] = routeParamValues[i];
+			return curVal;
+		}, {});
 		return routeParams;
 	}
 })

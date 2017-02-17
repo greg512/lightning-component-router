@@ -22,10 +22,11 @@
 			label = e.getParam('label'),
             newPathRouterName = e.getParam('routerName'),
             routeRouterName = routePath.indexOf('/') > 0 ? routePath.split('/')[0] : '',
-            hasRouteParam = routePath.indexOf(':') > 0,
+            hasRouteParams = routePath.indexOf(':') > 0,
             routeParams = [];
+		cmp.set('v.hasRouteParams', hasRouteParams);
 		cmp.set('v.label', label);
-        if(hasRouteParam) {
+        if(hasRouteParams) {
 			routeParams = h.getRouteParams(routePath, newPath);
             newPath = newPath.slice(0, routePath.indexOf(':'));
             routePath = routePath.slice(0, routePath.indexOf(':'));

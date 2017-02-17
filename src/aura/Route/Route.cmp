@@ -23,7 +23,7 @@
                     description="A unique label for the Route. Set from the routeChangeAttempt event, and passed through
                                  from the routeChangeStart event. Useful if the route uses a route parameter and
                                  you'd rather display a specific route label rather than the route name."
-                    default="" />
+                     default="" />
 
     <aura:attribute name="path"
                     type="String"
@@ -39,6 +39,11 @@
                     type="Object"
                     description="Object of attributes will populate Route component."
                     default="{}" />
+
+    <aura:attribute name="hasRouteParams"
+                    type="Boolean"
+                    description="Does the Route have route parameters?"
+                    default="false" />
 
 
         {!v.body}
