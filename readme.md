@@ -19,7 +19,7 @@ The `<c:Router>` component represents a connected group of routes. In this examp
 
 See how the Home route `path` value is a single forward slash? This is how you set the default Route for a Router. In this scenario, the c:home component will be initially rendered.
 
-At this point there's no way to navigate to other routes. You can do this with the `Link` component:
+Use the `Link` component to render/unrender routes.
 
 ```html
 <ul>
@@ -34,7 +34,7 @@ As you click each link rendered by the Link component, the Routes will render an
 ### A Major Drawback: Back/Forward Browser Navigation
 Unfortunately the framework prevents you from manipulating the browser history or changing the url for security reasons. If you use the back or forward navigation tools in your browser, it won't honor the navigation history inside of your Router. The Router maintains its own history and provides the tools to manage your own back/forward navigation and breadcrumbs from within the application container component, but that's the best that can be done for now.
 
-This is critical Router functionality, but there's [hope for the future](http://documentation.auraframework.org/auradocs#reference?topic=api:AuraHistoryService).
+*UPDATE: A new event (`force:navigateToComponent`) is in beta and will allow you to leverage standard back/forward browser navigation. I'll be replacing `$A.createComponent` with `force:navigateToComponent` in the near future.*
 
 ## Multiple Routers and Nested Routers
 You can have multiple routers and nested routers but you have to give the Router a unique name:
@@ -127,4 +127,6 @@ The `routeHistoryChangeSuccess` event is fired when the Router history changes. 
 The information provided from the routeHistoryChangeSuccess event can be used to set a conditional active class in your navigation or to build a breadcrumbs component.
 
 ## TODOs
- - Test navigating to components using the new force:navigateToComponent event
+ - Replace `$A.createComponent` with the `force:navigateToComponent` event. This will enable standard browser back/forward functionality in salesforce1 and the lightning experience.
+ - Build a solution that enables standard back/forward functionality if you're using lightning components in salesforce classic.
+ - Make the routeChangeAttempt application event a component event. In the past this wasn't wouldn't work, but it's now possible with the `includeFacets` attribute on the `aura:handler` component.
